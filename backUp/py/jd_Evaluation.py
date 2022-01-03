@@ -405,12 +405,15 @@ def start():
                         '//img10.360buyimg.com/shaidan/s645x515_jfs/t…1400/65152/619f3008E7f518459/2390d27ee9a3fb61.jpg'], 1)
                 }
                 req = requests.post(url, headers=headers, data=data)
-                if req.json()['data']['result'] != {}:
-                    #printf("\t晒单成功！！！")
-                    Cent[ce]['晒单'] += 1
-                else:
+                 try:
+                    if req.json()['data']['result'] != {}:
+                        #printf("\t晒单成功！！！")
+                        Cent[ce]['晒单'] += 1
+                    else:
+                        printf("\t晒单失败...")
+                        printf(req.json())
+                except:
                     printf("\t晒单失败...")
-                    printf(req.json())
                 #printf('等待5秒-可持续发展！')
                 time.sleep(5)
 
